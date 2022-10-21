@@ -1,0 +1,74 @@
+.container {
+  background-image: url("../public/cpu-image.jpg");
+  background-size: cover;
+}
+
+.navbar {
+  display: grid;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50vw;
+}
+
+.logo {
+  margin-left: auto;
+  margin-right: auto;
+  width: 20vh;
+}
+
+.nav {
+  display: grid;
+  grid-template-columns: 16.6667vw 16.6667vw 16.6667vw;
+  text-align: center;
+  margin-top: 3vh;
+  border-bottom: solid orange;
+  border-radius: 15px;
+}
+
+.nav a {
+  color: orange;
+  font-size: 2.5vw;
+  height: 5vh;
+  transform: translate(0,-1vw);
+  text-decoration: none;
+}
+
+.nav a:hover {
+  transform: scale(1.5, 1.5) translate(0,-1vw);
+}
+
+.title {
+  text-align: center;
+  font-size: 5vw;
+  color: orange;
+  text-shadow: 5px 5px #000000;
+  margin-top: 0;
+}
+
+.hook {
+  margin: auto;
+  width: 50vw;
+  text-align: center;
+  color: azure;
+  font-size: 10vw;
+  text-shadow: 5px 5px #000000;
+  -webkit-text-stroke: 0.25vw orangered;
+}
+
+.goals {
+  display: grid;
+  grid-template-columns: 50vw 35vw;
+}
+
+.goals img {
+  width: 30vw;
+  margin: 10vw;
+  border-radius: 15px;
+}
+
+.goals text {
+  margin-top: 12vw;
+  color: azure;
+  font-size: 3vw;
+  text-shadow: 2px 2px #000000;
+}

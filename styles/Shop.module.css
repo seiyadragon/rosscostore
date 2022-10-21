@@ -1,0 +1,39 @@
+.container {
+    background-image: url("../public/gamning-image.jpg");
+    background-size: cover;
+}
+
+.categories {
+    margin: auto;
+    width: 50vw;
+    padding-bottom: 5vh;
+}
+
+.categories ul{
+    list-style: none;
+    display: grid;
+    grid-template-columns: 16.666vw 16.666vw 16.666vw;
+    padding: 0;
+}
+
+.categories a {
+    text-decoration: none;
+}
+
+.category {
+    text-align: center;
+    margin: 1.8vh;
+    background-size: cover;
+    height: 5vw;
+    border-radius: 25px;
+    border: solid orange;
+}
+
+.category:hover {
+    transform: scale(1.2, 1.2);
+}
+
+.category text {
+    color: azure;
+    font-size: 2vw;
+}
