@@ -53,10 +53,12 @@
 .goals {
   display: grid;
   grid-template-columns: 45vw 35vw;
+  width: 80vw;
+  margin: auto;
 }
 
-.goals img {
-  width: 30vw;
+.goals section, .goals section img {
+  width: 33vw;
   margin: 10vw;
   border-radius: 15px;
 }

@@ -24,9 +24,9 @@ export function Navbar({title}) {
 export function PictureText({text, image}) {
   return (
     <section className={styles.goals}>
-        <img src={image}></img>
+        <section><Image src={image} width='1920' height='1080'></Image></section>
         <text>{text}</text>
-      </section>
+    </section>
   )
 }
 
@@ -40,7 +40,7 @@ export default function Home() {
         <h1 className={styles.hook}>Everything you need. No need to leave!</h1>
       </section>
 
-      <PictureText text="Here at RoßCo we love technology! And therefore want to bring you the latest and best in gadets at the lowest price!." image = 'gpu-image.jpg'/>
+      <PictureText text="Here at RoßCo we love technology! And therefore want to bring you the latest and best in gadets at the lowest price!." image = '/gpu-image.jpg'/>
 
     </main>
   )
