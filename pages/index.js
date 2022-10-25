@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
 export function Navbar({title}) {
@@ -10,7 +11,6 @@ export function Navbar({title}) {
         <link rel="icon" href="/rossco_logo.png" />
       </Head>
 
-      <img className={styles.logo} src='/rossco_logo.png'></img>
       <div className={styles.nav}>
         <a><Link href='/'><text>Home</text></Link></a>
         <a><Link href='/shop'><text>Shop</text></Link></a>
@@ -36,6 +36,7 @@ export default function Home() {
       <Navbar title="Home"/>
 
       <section>
+        <section className={styles.logo}><Image src='/rossco_logo.png' width='1920' height='1080'></Image></section>
         <h1 className={styles.hook}>Everything you need. No need to leave!</h1>
       </section>
 
