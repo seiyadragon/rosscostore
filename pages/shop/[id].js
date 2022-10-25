@@ -90,7 +90,7 @@ export function Category({category, products, productsInfo, productsImages, pare
                             return <Product key={products.id} product={product} productInfo={productsInfo[product.id]}
                                 image={productsImages[product.id].image} parentCategory={parentCategory} />
                         } else {
-                            return <li><text>{product.id}</text></li>
+                            return <li key={product.id}><text>{product.id}</text></li>
                         }
                     }
                 })}
