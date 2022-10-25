@@ -10,7 +10,7 @@ export async function getServerSideProps(context) {
     let catId = context.query.id
 
     //Load sql stuff
-    const db = await sqlite.open({filename: "./database.sqlite", driver: sqlite3.Database})
+    const db = await sqlite.open({filename: "/database.sqlite", driver: sqlite3.Database})
     let cat = await db.all("select * from Category where id = ?;", [catId])
     let childCats = await db.all("select * from Category where parentCategory = ?;", [catId])
 
