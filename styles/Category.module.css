@@ -24,6 +24,8 @@
     height: 8vw;
     background-size: cover;
     border: 3px solid darkgoldenrod;
+    margin-left: 0.25vw;
+    margin-right: 0.25vw;
 }
 
 .category ul a {

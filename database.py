@@ -104,7 +104,7 @@ def main():
     connection.close()
 
 if __name__ == "__main__":
-    run_database = True
+    run_database = False
 
     if run_database:
         main()

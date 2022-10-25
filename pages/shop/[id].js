@@ -1,7 +1,9 @@
 import { Navbar } from "..";
+import styles from '../../styles/Category.module.css'
+import Link from "next/link";
+
 const sqlite = require("sqlite")
 const sqlite3 = require("sqlite3")
-import styles from '../../styles/Category.module.css'
 
 //Load data from server
 export async function getServerSideProps(context) {
@@ -66,10 +68,12 @@ export async function getServerSideProps(context) {
 //Represents item in the store
 export function Product({product, productInfo, image, parentCategory}) {
     return (
-        <a href={`/shop/${parentCategory.id}/${product.id}`}>
-            <li className={styles.product} style={{'backgroundImage': `url(${image})`}}>
-                <text className={styles.product_title}><strong>{productInfo.name}</ strong><br/></text>
-            </li>
+        <a>
+            <Link href={`/shop/${parentCategory.id}/${product.id}`}>
+                <li className={styles.product} style={{'backgroundImage': `url(${image})`}}>
+                    <text className={styles.product_title}><strong>{productInfo.name}</ strong><br/></text>
+                </li>
+            </Link>
         </a>
     )
 }

@@ -1,5 +1,7 @@
 import { Navbar } from "..";
 import styles from '../../styles/Shop.module.css'
+import Link from "next/link";
+
 const sqlite = require("sqlite")
 const sqlite3 = require("sqlite3")
 
@@ -18,10 +20,12 @@ export async function getServerSideProps() {
 export function Category({category, image, link}) {
     return (
         <li>
-            <a href={link}>
-                <section className={styles.category} style={{'backgroundImage': `url(${image})`}}>
-                    <text>{category.name.replaceAll(' | ', ' ')}</text>
-                </section>
+            <a>
+                <Link href={link}>
+                    <section className={styles.category} style={{'backgroundImage': `url(${image})`}}>
+                        <text>{category.name.replaceAll(' | ', ' ')}</text>
+                    </section>
+                </Link>
             </a>
         </li>
     )

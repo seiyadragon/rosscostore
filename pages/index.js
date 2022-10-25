@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 
 export function Navbar({title}) {
@@ -11,9 +12,9 @@ export function Navbar({title}) {
 
       <img className={styles.logo} src='/rossco_logo.png'></img>
       <div className={styles.nav}>
-        <a href='/'><text>Home</text></a>
-        <a href='/shop'><text>Shop</text></a>
-        <a href='/contact'><text>Contact</text></a>
+        <a><Link href='/'><text>Home</text></Link></a>
+        <a><Link href='/shop'><text>Shop</text></Link></a>
+        <a><Link href='/contact'><text>Contact</text></Link></a>
       </div>
       <h1 className={styles.title}>{title}</h1>
     </div>
