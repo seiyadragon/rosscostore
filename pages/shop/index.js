@@ -20,7 +20,7 @@ export function Category({category, image, link}) {
         <li>
             <a href={link}>
                 <section className={styles.category} style={{'backgroundImage': `url(${image})`}}>
-                    <text>{category.name}</text>
+                    <text>{category.name.replaceAll(' | ', ' ')}</text>
                 </section>
             </a>
         </li>
@@ -35,7 +35,7 @@ export default function Shop({categories}) {
             <section className={styles.categories}>
                 <ul>
                     {categories.map((cat, index) => {
-                        return <Category category={cat} image="cpu-image.jpg" link={"/shop/" + cat.id} key={index}/>
+                        return <Category category={cat} image={cat.image} link={"/shop/" + cat.id} key={index}/>
                     })}
                 </ul>
             </section>

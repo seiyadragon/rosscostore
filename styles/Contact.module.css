@@ -1,11 +1,8 @@
 .container {
-    background-image: url("../public/pc-image.jpg");
-    background-size: cover;
-}
-
-.contact {
+    background-color: #14539A;
+    border-radius: 32px;
+    width: 80vw;
     margin: auto;
-    width: 50vw;
 }
 
 .email {
