@@ -1,53 +1,43 @@
-from concurrent.futures import thread
-from multiprocessing import connection
-import sqlite3
-from unicodedata import category
 import requests
 import time
-
-
-def table_setup(connection, db):
-    db.execute("drop table Category;")
-    db.execute("create table Category (id integer, name text, parentCategory integer, image text);")
-
-    db.execute("drop table Product;")
-    db.execute("create table Product (id integer, sku integer, category integer);")
-
-    db.execute("drop table ProductInfo;")
-    db.execute("create table ProductInfo (id integer, name text, description text);")
-
-    db.execute("drop table ProductImage;")
-    db.execute("create table ProductImage (id integer, isCover boolean, image text)")
-    
-    connection.commit()
+from supabase import create_client, Client
 
 def main():
     print("Initializing database...")
-    connection = sqlite3.connect("./database.sqlite")
-    db = connection.cursor()
 
-    table_setup(connection, db)
+    supabase: Client = create_client(
+        "https://jnbnzuyiuuaocbltwewu.supabase.co", 
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpuYm56dXlpdXVhb2NibHR3ZXd1Iiwicm9sZSI6Im" +
+        "Fub24iLCJpYXQiOjE2NjY3MjExMjEsImV4cCI6MTk4MjI5NzEyMX0.vnmH8LhJevM1ju-l9d0MnRXL6BmGNjOTw5XS0vO6NHY"
+    )
 
     num_pages = 5
     page_size = 10000
 
-    categories_respose = requests.get("https://api.bigbuy.eu/rest/catalog/categories.json?isoCode=en",
-    headers = {"Authorization": "Bearer NjU5YzM3MzllNjM5YzFiYzNkMTkxZmQ0NTMyNGI4MzU0NzViZDAyOTI3NWZlZDliYzdkNmRjYWM5OTRkNjc1Nw"})
+    load_categories = True
 
-    categories_respose.raise_for_status()
-    categories = categories_respose.json()
+    if load_categories:
+        categories_respose = requests.get("https://api.bigbuy.eu/rest/catalog/categories.json?isoCode=en",
+        headers = {"Authorization": "Bearer NjU5YzM3MzllNjM5YzFiYzNkMTkxZmQ0NTMyNGI4MzU0NzViZDAyOTI3NWZlZDliYzdkNmRjYWM5OTRkNjc1Nw"})
 
-    print("Loading Categories...")
-    for cat in categories:
-        id = cat["id"]
-        name = cat["name"]
-        parentCategory = cat["parentCategory"]
-        images = cat["urlImages"]
-        values = [id, name, parentCategory, images[1]]
+        categories_respose.raise_for_status()
+        categories = categories_respose.json()
 
-        db.execute("insert into Category (id, name, parentCategory, image) values(?, ?, ?, ?);", values)
-        print(values)
-    connection.commit()
+        print("Loading Categories...")
+        for cat in categories:
+            id = cat["id"]
+            name = cat["name"]
+            parentCategory = cat["parentCategory"]
+            images = cat["urlImages"]
+
+            data = supabase.table("Category").insert({
+                "id": id,
+                "name": name,
+                "parentCategory": parentCategory,
+                "imageUrl": images[1]
+            }).execute()
+            print(data)
+    else: print("Skipping Categories...")
 
     print("Loading Products...")
     for i in range(0, num_pages):
@@ -61,10 +51,19 @@ def main():
             id = product["id"]
             sku = product["sku"]
             category = product["category"]
-            values = [id, sku, category]
+            wholesale_price = product["wholesalePrice"]
+            retail_price = product["retailPrice"]
+            in_shop_price = product["inShopsPrice"]
 
-            db.execute("insert into Product (id, sku, category) values(?, ?, ?);", values)
-            print(values)
+            data = supabase.table("Product").insert({
+                "id": id,
+                "sku": sku,
+                "category": category,
+                "wholesalePrice": wholesale_price,
+                "retailPrice": retail_price,
+                "inShopPrice": in_shop_price
+            }).execute()
+            print(data)
 
         for product in products:
             try:
@@ -77,10 +76,13 @@ def main():
                 id = product_info[0]["id"]
                 name = product_info[0]["name"]
                 description = product_info[0]["description"]
-                values = [id, name, description]
 
-                db.execute("insert into ProductInfo (id, name, description) values(?, ?, ?);", values)
-                print(values)
+                data = supabase.table("ProductInfo").insert({
+                    "id": id,
+                    "name": name,
+                    "description": description
+                }).execute()
+                print(data)
 
                 print("Loading Product Images... " + str(id))
                 product_images_response = requests.get("https://api.bigbuy.eu/rest/catalog/productimages/" + str(product["id"]) + ".json?isoCode=en", 
@@ -93,15 +95,17 @@ def main():
                     is_cover = image["isCover"]
                     image = image["url"]
                     values = [id, is_cover, image]
-                    db.execute("insert into ProductImage (id, isCover, image) values(?, ?, ?)", values)
-                    print(values)
+                    
+                    data = supabase.table("ProductImage").insert({
+                        "id": id,
+                        "isCover": is_cover,
+                        "url": image
+                    }).execute()
+                    print(data)
             except:
                 continue
 
-            connection.commit()
             time.sleep(5.0)
-
-    connection.close()
 
 if __name__ == "__main__":
     run_database = True

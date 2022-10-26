@@ -43,3 +43,14 @@
     font-family: monospace;
     -webkit-text-stroke: 1px black;
 }
+
+.page_selector {
+    width: 4vw;
+    margin: auto;
+    font-size: 4vw;
+    color: orange;
+}
+
+.page_selector a:hover {
+    color: darkgoldenrod;
+}
