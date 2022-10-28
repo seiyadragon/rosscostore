@@ -39,9 +39,7 @@ export function CategorySelector({categories, currentCategory}) {
         <section className={styles.categories}>
             {currentCategory == null &&
                 <section className={styles.noCategory}>
-                    <text>
-                        There is nothing you won't find at RoßCo!
-                    </text>
+                    <text>There is nothing you won't find at RoßCo!</text>
                 </section>
             }
             
