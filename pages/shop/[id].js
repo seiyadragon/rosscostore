@@ -47,12 +47,13 @@ export function Product({product, info}) {
     return (
         <Link href="/">
             <section className={styles.product}>
-                <section>
+                <section className={styles.productImage}>
                     <Image src={`${info.images[0].url}`} width={1280} height={720} />
                 </section>
                 <section className={styles.productInfo}>
                     <text>{info.name}</text>
-                    <text>{" $" + product.inShopPrice}</text>
+                    <br />
+                    <text className={styles.productPrice}><strong>{" $" + product.inShopPrice}</strong></text>
                 </section>
             </section>
         </Link>
@@ -69,7 +70,7 @@ export function SubCategory({category, products, infos}) {
                 <ul>
                     {products.map((product) => {
                         if (product.category === category.id)
-                            return <li><Product product={product} info={infos[product.id]}/></li>
+                            return <li key={product.id}><Product product={product} info={infos[product.id]}/></li>
                     })}
                 </ul>
             </section>

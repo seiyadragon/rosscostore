@@ -25,11 +25,15 @@
 
 .subCategory ul {
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: repeat(auto-fit, 20%);
+    column-gap: 2vw;
+    row-gap: 2vh;
 }
 
-.title {
-    background-color: orangered;
+@media all and (max-width: 600px) {
+    .subCategory ul {
+        grid-template-columns: repeat(auto-fit, 45%);
+    }
 }
 
 .subBody {
@@ -37,11 +41,26 @@
 }
 
 .product {
-    font-size: clamp(20px, 1vw, 30px);
+    font-size: clamp(16px, 1vw, 30px);
     width: 100%;
-    word-wrap: break-word;
+    background-color: white;
+    margin-left: 4vw;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    border: solid 3px black;
+    border-radius: 16px;
+    text-align: center;
 }
 
 .product:hover {
+    transform: scale(1.05, 1.05);
     color: blue;
+}
+
+.productImage {
+    padding: 1vw;
+}
+
+.productPrice {
+    font-size: clamp(26px, 1vw, 46px);
 }

@@ -7,7 +7,6 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'cdnbigbuy.com',
-        port: '',
         pathname: '/images/**',
       },
     ],
