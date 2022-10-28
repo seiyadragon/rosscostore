@@ -23,24 +23,23 @@
     margin: auto;
 }
 
+.subCategory ul {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+
 .title {
     background-color: orangered;
-    border: solid 1px black;
 }
 
 .subBody {
-    border: solid 1px black;
     text-align: left;
 }
 
 .product {
-    display: grid;
-    grid-template-columns: 15vw 50vw;
-    font-size: clamp(14px, 1vw, 24px);
-    width: auto;
+    font-size: clamp(20px, 1vw, 30px);
+    width: 100%;
     word-wrap: break-word;
-    margin-left: 0px;
-    margin-bottom: 5vh;
 }
 
 .product:hover {

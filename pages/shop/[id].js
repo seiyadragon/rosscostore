@@ -48,12 +48,11 @@ export function Product({product, info}) {
         <Link href="/">
             <section className={styles.product}>
                 <section>
-                    <Image src={`${info.images[0].url}`} width={640} height={360} />
+                    <Image src={`${info.images[0].url}`} width={1280} height={720} />
                 </section>
                 <section className={styles.productInfo}>
                     <text>{info.name}</text>
-                    <br />
-                    <text dangerouslySetInnerHTML={{__html: info.description}}></text>
+                    <text>{" $" + product.inShopPrice}</text>
                 </section>
             </section>
         </Link>
