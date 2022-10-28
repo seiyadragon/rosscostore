@@ -2,18 +2,18 @@
   display: grid;
   margin-left: auto;
   margin-right: auto;
-  width: 50vw;
+  width: 80vw;
 }
 
 .logo {
   margin-left: auto;
   margin-right: auto;
-  width: 50vh;
+  width: clamp(100px, 50vw, 800px);
 }
 
 .nav {
   display: grid;
-  grid-template-columns: 16.6667vw 16.6667vw 16.6667vw;
+  grid-template-columns: 26.6667vw 26.6667vw 26.6667vw;
   text-align: center;
   margin-top: 3vh;
   border-bottom: solid orange;
@@ -22,19 +22,17 @@
 
 .nav a {
   color: orange;
-  font-size: 2.5vw;
-  height: 5vh;
-  transform: translate(0,-1vw);
+  font-size: clamp(40px, 5vw, 100px);
   text-decoration: none;
 }
 
 .nav a:hover {
-  transform: scale(1.5, 1.5) translate(0,-1vw);
+  transform: scale(1.05, 1.05);
 }
 
 .title {
   text-align: center;
-  font-size: 5vw;
+  font-size: clamp(60px, 5vw, 90px);
   color: orange;
   text-shadow: 5px 5px #000000;
   margin-top: 0;
@@ -45,7 +43,7 @@
   width: 50vw;
   text-align: center;
   color: azure;
-  font-size: 10vw;
+  font-size: clamp(80px, 10vw, 300px);
   text-shadow: 5px 5px #000000;
   -webkit-text-stroke: 0.25vw orangered;
 }
@@ -61,12 +59,13 @@
   width: 33vw;
   margin: 10vw;
   border-radius: 15px;
+  background-size: contain;
 }
 
 .goals text {
   margin-top: 10vw;
   color: azure;
-  font-size: 3vw;
+  font-size: clamp(30px, 5vw, 60px);
   text-shadow: 2px 2px #000000;
   width: 30vw;
 }

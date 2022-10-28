@@ -40,7 +40,10 @@ export default function Home() {
         <h1 className={styles.hook}>Everything you need. No need to leave!</h1>
       </section>
 
-      <PictureText text="Here at RoßCo we love technology! And therefore want to bring you the latest and best in gadets at the lowest price!." image = '/gpu-image.jpg'/>
+      <PictureText
+        text="Here at RoßCo we love technology! And therefore want to bring you the latest and best in gadets at the lowest price!."
+        image = '/gpu-image.jpg'
+      />
 
     </main>
   )

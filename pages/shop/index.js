@@ -8,7 +8,7 @@ const supabase = createClient("https://jnbnzuyiuuaocbltwewu.supabase.co",
 "uYm56dXlpdXVhb2NibHR3ZXd1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjY3MjExMjEsImV4cCI6MTk4MjI5NzEyMX0.vnmH8LhJevM1ju-l9d0MnRXL6BmGNjOTw5XS0vO6NHY")
 
 export async function getServerSideProps() {
-    const {data: cats, error} = await supabase.from('Category').select().eq('parentCategory', 2) 
+    const {data: cats, error} = await supabase.from('Category').select('*').eq('parentCategory', 2) 
 
     if (error != null)
         console.log(error.details)
@@ -20,12 +20,12 @@ export async function getServerSideProps() {
     }
 }
 
-export function Category({category, image, link}) {
+export function Category({category, backgroundColor, link}) {
     return (
-        <li>
+        <li style={{"backgroundColor": backgroundColor}}>
             <a>
-                <Link href={link}>
-                    <section className={styles.category} style={{'backgroundImage': `url(${image})`}}>
+                <Link scroll={false} href={link}>
+                    <section className={styles.category}>
                         <text>{category.name.replaceAll(' | ', ' ')}</text>
                     </section>
                 </Link>
@@ -34,18 +34,36 @@ export function Category({category, image, link}) {
     )
 }
 
+export function CategorySelector({categories, currentCategory}) {
+    return (
+        <section className={styles.categories}>
+            {currentCategory == null &&
+                <section className={styles.noCategory}>
+                    <text>
+                        There is nothing you won't find at RoßCo!
+                    </text>
+                </section>
+            }
+            
+            <ul>
+                {categories.map((cat, index) => {
+                    if (currentCategory != null && cat.id === currentCategory.id)
+                        return <Category category={cat} backgroundColor="darkgoldenrod" link={"/shop/" + cat.id} key={index}/>
+                    else {
+                        return <Category category={cat} backgroundColor="#810020" link={"/shop/" + cat.id} key={index}/>
+                    }
+                })}
+            </ul>
+        </section>
+    )
+}
+
 export default function Shop({categories}) {
     return (
         <main className={styles.container}>
             <Navbar title="Shop"/>
 
-            <section className={styles.categories}>
-                <ul>
-                    {categories.map((cat, index) => {
-                        return <Category category={cat} image={cat.imageUrl} link={"/shop/" + cat.id + "?page=0"} key={index}/>
-                    })}
-                </ul>
-            </section>
+            <CategorySelector categories={categories} />
 
         </main>
     )
