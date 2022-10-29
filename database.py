@@ -41,56 +41,59 @@ def main():
 
     print("Loading Products...")
     for i in range(0, num_pages):
-        print("Loading Page... " + str(i))
-        products_response = requests.get("https://api.bigbuy.eu/rest/catalog/products.json?isoCode=en&pageSize=" + str(page_size) + "&page=" + str(i), 
-        headers = {"Authorization": "Bearer NjU5YzM3MzllNjM5YzFiYzNkMTkxZmQ0NTMyNGI4MzU0NzViZDAyOTI3NWZlZDliYzdkNmRjYWM5OTRkNjc1Nw"})
-        products_response.raise_for_status()
-        products = products_response.json()
-
-        for product in products:
-            id = product["id"]
-            sku = product["sku"]
-            category = product["category"]
-            wholesale_price = product["wholesalePrice"]
-            retail_price = product["retailPrice"]
-            in_shop_price = product["inShopsPrice"]
-
-            data = supabase.table("Product").insert({
-                "id": id,
-                "sku": sku,
-                "category": category,
-                "wholesalePrice": wholesale_price,
-                "retailPrice": retail_price,
-                "inShopPrice": in_shop_price
-            }).execute()
-            print(data)
-
-            print("Loading Product Info... " + str(product["id"]))
-            product_info_response = requests.get("https://api.bigbuy.eu/rest/catalog/productinformation/" + str(product["id"]) + ".json?isoCode=en", 
+        try:
+            print("Loading Page... " + str(i))
+            products_response = requests.get("https://api.bigbuy.eu/rest/catalog/products.json?isoCode=en&pageSize=" + str(page_size) + "&page=" + str(i), 
             headers = {"Authorization": "Bearer NjU5YzM3MzllNjM5YzFiYzNkMTkxZmQ0NTMyNGI4MzU0NzViZDAyOTI3NWZlZDliYzdkNmRjYWM5OTRkNjc1Nw"})
-            product_info_response.raise_for_status()
-            product_info = product_info_response.json()
+            products_response.raise_for_status()
+            products = products_response.json()
 
-            print("Loading Product Images... " + str(id))
-            product_images_response = requests.get("https://api.bigbuy.eu/rest/catalog/productimages/" + str(product["id"]) + ".json?isoCode=en", 
-            headers = {"Authorization": "Bearer NjU5YzM3MzllNjM5YzFiYzNkMTkxZmQ0NTMyNGI4MzU0NzViZDAyOTI3NWZlZDliYzdkNmRjYWM5OTRkNjc1Nw"})
-            product_images_response.raise_for_status()
-            product_images = product_images_response.json()
+            for product in products:
+                id = product["id"]
+                sku = product["sku"]
+                category = product["category"]
+                wholesale_price = product["wholesalePrice"]
+                retail_price = product["retailPrice"]
+                in_shop_price = product["inShopsPrice"]
 
-            id = product_info[0]["id"]
-            name = product_info[0]["name"]
-            description = product_info[0]["description"]
-            images = product_images["images"]
+                data = supabase.table("Product").insert({
+                    "id": id,
+                    "sku": sku,
+                    "category": category,
+                    "wholesalePrice": wholesale_price,
+                    "retailPrice": retail_price,
+                    "inShopPrice": in_shop_price
+                }).execute()
+                print(data)
 
-            data = supabase.table("ProductInfo").insert({
-                "id": id,
-                "name": name,
-                "description": description,
-                "images": images
-            }).execute()
-            print(data)
+                print("Loading Product Info... " + str(product["id"]))
+                product_info_response = requests.get("https://api.bigbuy.eu/rest/catalog/productinformation/" + str(product["id"]) + ".json?isoCode=en", 
+                headers = {"Authorization": "Bearer NjU5YzM3MzllNjM5YzFiYzNkMTkxZmQ0NTMyNGI4MzU0NzViZDAyOTI3NWZlZDliYzdkNmRjYWM5OTRkNjc1Nw"})
+                product_info_response.raise_for_status()
+                product_info = product_info_response.json()
 
-            time.sleep(5.0)
+                print("Loading Product Images... " + str(id))
+                product_images_response = requests.get("https://api.bigbuy.eu/rest/catalog/productimages/" + str(product["id"]) + ".json?isoCode=en", 
+                headers = {"Authorization": "Bearer NjU5YzM3MzllNjM5YzFiYzNkMTkxZmQ0NTMyNGI4MzU0NzViZDAyOTI3NWZlZDliYzdkNmRjYWM5OTRkNjc1Nw"})
+                product_images_response.raise_for_status()
+                product_images = product_images_response.json()
+
+                id = product_info[0]["id"]
+                name = product_info[0]["name"]
+                description = product_info[0]["description"]
+                images = product_images["images"]
+
+                data = supabase.table("ProductInfo").insert({
+                    "id": id,
+                    "name": name,
+                    "description": description,
+                    "images": images
+                }).execute()
+                print(data)
+
+                time.sleep(5.0)
+        except:
+            continue
 
 if __name__ == "__main__":
     run_database = True

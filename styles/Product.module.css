@@ -1,0 +1,42 @@
+.category {
+    display: grid;
+    grid-template-columns: 25vw 50vw;
+}
+
+.categoryBody {
+    background-color: darkgoldenrod;
+    margin-top: 1.7vh;
+    height: clamp(760px, 100%, 920px);
+    width: 70vw;
+    overflow-y: scroll;
+    border: solid 3px black;
+}
+
+.title {
+    text-align: center;
+    font-size: clamp(16px, 5vw, 48px);
+    text-decoration: underline;
+}
+
+.images ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
+
+.images ul li {
+    display: inline;
+    margin-left: 0.5vw;
+}
+
+.images ul li button {
+    border: none;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+}
+
+.productBody {
+    font-size: clamp(12px, 5vw, 24px);
+}

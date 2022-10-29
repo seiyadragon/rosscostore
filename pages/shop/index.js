@@ -46,7 +46,7 @@ export function CategorySelector({categories, currentCategory}) {
             <ul>
                 {categories.map((cat, index) => {
                     if (currentCategory != null && cat.id === currentCategory.id)
-                        return <Category category={cat} backgroundColor="darkgoldenrod" link={"/shop/" + cat.id} key={index}/>
+                        return <Category category={cat} backgroundColor="orangered" link={"/shop/" + cat.id} key={index}/>
                     else {
                         return <Category category={cat} backgroundColor="#810020" link={"/shop/" + cat.id} key={index}/>
                     }

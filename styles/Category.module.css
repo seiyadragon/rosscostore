@@ -6,9 +6,10 @@
 .categoryBody {
     background-color: darkgoldenrod;
     margin-top: 1.7vh;
-    height: 80vh;
+    height: clamp(760px, 100%, 920px);
     width: 70vw;
     overflow-y: scroll;
+    border: solid 3px black;
 }
 
 .categoryBody ul {
@@ -26,7 +27,7 @@
 .subCategory ul {
     display: grid;
     grid-template-columns: repeat(auto-fit, 20%);
-    column-gap: 2vw;
+    column-gap: clamp(10px, 3.5vw, 100px);
     row-gap: 2vh;
 }
 
@@ -44,7 +45,7 @@
     font-size: clamp(16px, 1vw, 30px);
     width: 100%;
     background-color: white;
-    margin-left: 4vw;
+    margin-left: clamp(5px, 1.5vw, 300px);
     margin-top: 2vh;
     margin-bottom: 2vh;
     border: solid 3px black;

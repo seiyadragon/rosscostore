@@ -1,8 +1,8 @@
-import { Navbar } from "..";
-import styles from '../../styles/Category.module.css'
+import { Navbar } from "../../";
+import styles from '../../../styles/Category.module.css'
 import Link from "next/link";
 import { createClient } from '@supabase/supabase-js'
-import { CategorySelector } from ".";
+import { CategorySelector } from "..";
 import Image from "next/image";
 
 const supabase = createClient("https://jnbnzuyiuuaocbltwewu.supabase.co", 
@@ -43,12 +43,18 @@ export async function getServerSideProps(context) {
     }
 }
 
-export function Product({product, info}) {
+export function Product({product, info, mainCategory}) {
+    let coverImage = ""
+    info.images.map((image) => {
+        if (image.isCover)
+            coverImage = image.url
+    })
+
     return (
-        <Link href="/">
+        <Link href={"/shop/" + mainCategory.id + "/" + product.id}>
             <section className={styles.product}>
                 <section className={styles.productImage}>
-                    <Image src={`${info.images[0].url}`} width={1280} height={720} />
+                    <Image src={`${coverImage}`} width={1280} height={720} />
                 </section>
                 <section className={styles.productInfo}>
                     <text>{info.name}</text>
@@ -60,7 +66,7 @@ export function Product({product, info}) {
     )
 }
 
-export function SubCategory({category, products, infos}) {
+export function SubCategory({category, products, infos, mainCategory}) {
     return (
         <section className={styles.subCategory}>
             <section className={styles.title}>
@@ -70,7 +76,7 @@ export function SubCategory({category, products, infos}) {
                 <ul>
                     {products.map((product) => {
                         if (product.category === category.id)
-                            return <li key={product.id}><Product product={product} info={infos[product.id]}/></li>
+                            return <li key={product.id}><Product product={product} info={infos[product.id]} mainCategory={mainCategory}/></li>
                     })}
                 </ul>
             </section>
@@ -89,7 +95,7 @@ export default function CategoryPage({categories, currentCategory, subCategories
                         {subCategories.map((category) => {
                             return (
                                 <li key={category.id}>
-                                    <SubCategory category={category} products={products} infos={infos}/>
+                                    <SubCategory category={category} products={products} infos={infos} mainCategory={currentCategory}/>
                                 </li>
                             )
                         })}

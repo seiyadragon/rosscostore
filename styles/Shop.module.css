@@ -17,6 +17,7 @@
     background-repeat: no-repeat;
     border-radius: 25px;
     text-align: right;
+    margin-right: 1.5vw;
 }
 
 .category:hover {
