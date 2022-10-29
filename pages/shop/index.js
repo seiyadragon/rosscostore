@@ -24,7 +24,7 @@ export function Category({category, backgroundColor, link}) {
     return (
         <li style={{"backgroundColor": backgroundColor}}>
             <a>
-                <Link scroll={false} href={link}>
+                <Link href={link}>
                     <section className={styles.category}>
                         <text>{category.name.replaceAll(' | ', ' ')}</text>
                     </section>
