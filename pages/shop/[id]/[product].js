@@ -48,7 +48,7 @@ export function ProductDetails({product, info}) {
                     {info.images.map((image) => {
                         return (
                             <li key={image.id}>
-                                <button style={{'border': currentUrl == image.url ? 'solid 1px black' : 'none'}}onClick={() => onButtonClick(image.url)}>
+                                <button style={{'border': currentUrl == image.url ? 'solid 3px purple' : 'solid 3px orange'}}onClick={() => onButtonClick(image.url)}>
                                     <Image src={`${image.url}`} width={1920/16} height={1080/16}/>
                                 </button>
                             </li>

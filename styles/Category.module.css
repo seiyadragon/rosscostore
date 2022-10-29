@@ -6,9 +6,7 @@
 .categoryBody {
     background-color: darkgoldenrod;
     margin-top: 1.7vh;
-    height: clamp(760px, 100%, 920px);
     width: 70vw;
-    overflow-y: scroll;
     border: solid 3px black;
 }
 
@@ -64,4 +62,13 @@
 
 .productPrice {
     font-size: clamp(26px, 1vw, 46px);
+}
+
+.title {
+    background-color: red;
+}
+
+.title text {
+    color: white;
+    text-shadow: black 2px 2px;
 }

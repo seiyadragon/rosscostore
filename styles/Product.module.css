@@ -6,9 +6,7 @@
 .categoryBody {
     background-color: darkgoldenrod;
     margin-top: 1.7vh;
-    height: clamp(760px, 100%, 920px);
     width: 70vw;
-    overflow-y: scroll;
     border: solid 3px black;
 }
 

@@ -69,11 +69,16 @@ export function Product({product, info, mainCategory}) {
 }
 
 export function SubCategory({category, products, infos, mainCategory}) {
+    let productsCategory = []
+    for (let i = 0; i < products.length; i++)
+        if (products[i].category === category.id)
+            productsCategory.push(products[i])
+
     return (
-        infos.length > 0 &&
+        productsCategory.length > 0 &&
         <section className={styles.subCategory}>
             <section className={styles.title}>
-                <text>{category.name}</text>
+                <text><strong>{category.name}</strong></text>
             </section>
             <section className={styles.subBody}>
                 <ul>
