@@ -45,10 +45,11 @@ export async function getServerSideProps(context) {
 
 export function Product({product, info, mainCategory}) {
     let coverImage = ""
-    info.images.map((image) => {
-        if (image.isCover)
-            coverImage = image.url
-    })
+    if (typeof info.images !== 'undefined')
+        info.images.map((image) => {
+            if (image.isCover)
+                coverImage = image.url
+        })
 
     return (
         <Link href={"/shop/" + mainCategory.id + "/" + product.id}>
