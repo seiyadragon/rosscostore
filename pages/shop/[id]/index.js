@@ -70,6 +70,7 @@ export function Product({product, info, mainCategory}) {
 
 export function SubCategory({category, products, infos, mainCategory}) {
     return (
+        infos.length > 0 &&
         <section className={styles.subCategory}>
             <section className={styles.title}>
                 <text>{category.name}</text>
