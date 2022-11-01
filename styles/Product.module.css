@@ -14,6 +14,7 @@
     text-align: center;
     font-size: clamp(16px, 5vw, 48px);
     text-decoration: underline;
+    color: azure;
 }
 
 .images ul {
@@ -37,4 +38,9 @@
 
 .productBody {
     font-size: clamp(12px, 5vw, 24px);
+    color: azure;
+    margin: 5%;
+    margin-top: 2.5%;
+    border-top: 3px solid;
+    border-bottom: 3px solid;
 }

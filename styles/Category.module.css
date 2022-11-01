@@ -60,8 +60,14 @@
     padding: 1vw;
 }
 
-.productPrice {
-    font-size: clamp(26px, 1vw, 46px);
+.productRetailPrice {
+    font-size: clamp(16px, 1vw, 26px);
+    text-decoration: line-through;
+    color: gray;
+}
+
+.productWholesalePrice {
+    font-size: clamp(36px, 1vw, 66px);
 }
 
 .title {

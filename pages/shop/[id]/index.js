@@ -15,8 +15,20 @@ export async function getServerSideProps(context) {
     const {data: categories, err2} = await supabase.from('Category').select('*').eq('parentCategory', 2)
     const {data: currentCategory, err3} = await supabase.from('Category').select('*').eq('id', context.query.id)
 
-    const {data: products, err4} = await supabase.from('Product').select('*')
-    const {data: infos, err5} = await supabase.from('ProductInfo').select('*')
+    let products = []
+    let shouldLoadMoreProducts = true
+    let productRangeCounter = 0
+    while (shouldLoadMoreProducts) {
+        const {data: prods, err4} = await supabase.from('Product').select('*').range(productRangeCounter * 1000, ((productRangeCounter + 1) * 1000))
+        prods.map((product) => {
+            products.push(product)
+        })
+
+        if (prods.length < 1000)
+            shouldLoadMoreProducts = false
+
+        productRangeCounter++
+    }
 
     let subCategories = []
     for (let i = 0; i < allCategories.length; i++) 
@@ -28,47 +40,43 @@ export async function getServerSideProps(context) {
             if (allCategories[i].parentCategory == subCategories[j].id)
                 subCategories.push(allCategories[i])
 
-    let infosDict = {}
-    for (let i = 0; i < infos.length; i++)
-        infosDict[infos[i].id] = infos[i]
-
     return {
         props: {
             categories: categories,
             currentCategory: currentCategory[0],
             subCategories: subCategories,
-            products: products,
-            infos: infosDict
+            products: products
         }
     }
 }
 
-export function Product({product, info, mainCategory}) {
+export function Product({product, mainCategory}) {
     let coverImage = ""
-    if (typeof info !== 'undefined')
-        info.images.map((image) => {
+    if (typeof product !== 'undefined')
+        product.images.map((image) => {
             if (image.isCover)
                 coverImage = image.url
         })
 
     return (
-        typeof info !== 'undefined' && 
+        typeof product !== 'undefined' && 
         <Link href={"/shop/" + mainCategory.id + "/" + product.id}>
             <section className={styles.product}>
                 <section className={styles.productImage}>
                     <Image src={`${coverImage}`} width={1280} height={720} />
                 </section>
                 <section className={styles.productInfo}>
-                    <text>{info.name}</text>
+                    <text>{product.name}</text>
                     <br />
-                    <text className={styles.productPrice}><strong>{" $" + product.inShopPrice}</strong></text>
+                    <text className={styles.productRetailPrice}><strong>{" $" + product.retailPrice}</strong></text><br />
+                    <text className={styles.productWholesalePrice}><strong>{" $" + product.wholesalePrice}</strong></text>
                 </section>
             </section>
         </Link>
     )
 }
 
-export function SubCategory({category, products, infos, mainCategory}) {
+export function SubCategory({category, products, mainCategory}) {
     let productsCategory = []
     for (let i = 0; i < products.length; i++)
         if (products[i].category === category.id)
@@ -78,13 +86,13 @@ export function SubCategory({category, products, infos, mainCategory}) {
         productsCategory.length > 0 &&
         <section className={styles.subCategory}>
             <section className={styles.title}>
-                <text><strong>{category.name}</strong></text>
+                <text><strong>{category.name + "!"}</strong></text>
             </section>
             <section className={styles.subBody}>
                 <ul>
-                    {products.map((product) => {
+                    {productsCategory.map((product) => {
                         if (product.category === category.id)
-                            return <li key={product.id}><Product product={product} info={infos[product.id]} mainCategory={mainCategory}/></li>
+                            return <li key={product.id}><Product product={product} mainCategory={mainCategory}/></li>
                     })}
                 </ul>
             </section>
@@ -92,10 +100,10 @@ export function SubCategory({category, products, infos, mainCategory}) {
     )
 }
 
-export default function CategoryPage({categories, currentCategory, subCategories, products, infos}) {
+export default function CategoryPage({categories, currentCategory, subCategories, products}) {
     return (
         <main className={styles.container}>
-            <Navbar title={currentCategory.name}/>
+            <Navbar title={`${currentCategory.name}`}/>
             <section className={styles.category}>
                 <CategorySelector categories={categories} currentCategory={currentCategory}/>
                 <section className={styles.categoryBody}>
@@ -103,7 +111,7 @@ export default function CategoryPage({categories, currentCategory, subCategories
                         {subCategories.map((category) => {
                             return (
                                 <li key={category.id}>
-                                    <SubCategory category={category} products={products} infos={infos} mainCategory={currentCategory}/>
+                                    <SubCategory category={category} products={products} mainCategory={currentCategory}/>
                                 </li>
                             )
                         })}
