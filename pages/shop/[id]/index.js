@@ -80,7 +80,7 @@ export function SubCategory({category, products, mainCategory}) {
     let productsCategory = []
     if (typeof products !== 'undefined')
         for (let i = 0; i < products.length; i++)
-            f (products[i].category === category.id)
+            if (products[i].category === category.id)
                 productsCategory.push(products[i])
 
     return (
