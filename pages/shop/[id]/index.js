@@ -15,21 +15,6 @@ export async function getServerSideProps(context) {
     const {data: categories, err2} = await supabase.from('Category').select('*').eq('parentCategory', 2)
     const {data: currentCategory, err3} = await supabase.from('Category').select('*').eq('id', context.query.id)
 
-    let products = []
-    let shouldLoadMoreProducts = true
-    let productRangeCounter = 0
-    while (shouldLoadMoreProducts) {
-        const {data: prods, err4} = await supabase.from('Product').select('*').range(productRangeCounter * 1000, ((productRangeCounter + 1) * 1000))
-        prods.map((product) => {
-            products.push(product)
-        })
-
-        if (prods.length < 1000)
-            shouldLoadMoreProducts = false
-
-        productRangeCounter++
-    }
-
     let subCategories = []
     for (let i = 0; i < allCategories.length; i++) 
         if (allCategories[i].parentCategory == currentCategory[0].id) 
@@ -39,6 +24,24 @@ export async function getServerSideProps(context) {
         for (let i = 0; i < allCategories.length; i++)
             if (allCategories[i].parentCategory == subCategories[j].id)
                 subCategories.push(allCategories[i])
+
+    let products = []
+    let shouldLoadMoreProducts = true
+    let productRangeCounter = 0
+    while (shouldLoadMoreProducts) {
+        const {data: prods, err4} = await supabase.from('Product').select('*').range(productRangeCounter * 1000, ((productRangeCounter + 1) * 1000))
+        prods.map((product) => {
+            subCategories.map((cat) => {
+                if (product.category == cat.id)
+                    products.push(product)
+            })
+        })
+
+        if (prods.length < 1000)
+            shouldLoadMoreProducts = false
+
+        productRangeCounter++
+    }
 
     return {
         props: {
