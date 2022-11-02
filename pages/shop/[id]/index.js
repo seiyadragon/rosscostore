@@ -92,8 +92,7 @@ export function SubCategory({category, products, mainCategory}) {
             <section className={styles.subBody}>
                 <ul>
                     {productsCategory.map((product) => {
-                        if (product.category === category.id)
-                            return <li key={product.id}><Product product={product} mainCategory={mainCategory}/></li>
+                        return <li key={product.id}><Product product={product} mainCategory={mainCategory}/></li>
                     })}
                 </ul>
             </section>
