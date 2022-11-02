@@ -69,7 +69,9 @@ export function Product({product, mainCategory}) {
                     <Image src={`${coverImage}`} width={1280} height={720} />
                 </section>
                 <section className={styles.productInfo}>
-                    <text>{product.name}</text>
+                    <section className={styles.productTitle}>
+                        <strong><text>{product.name}</text></strong>
+                    </section>
                     <br />
                     <text className={styles.productRetailPrice}><strong>{" $" + product.retailPrice}</strong></text><br />
                     <text className={styles.productWholesalePrice}><strong>{" $" + product.wholesalePrice}</strong></text>

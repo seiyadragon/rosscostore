@@ -7,7 +7,7 @@
     background-color: darkgoldenrod;
     margin-top: 1.7vh;
     width: 70vw;
-    border: solid 3px black;
+    border: solid 3px orangered;
 }
 
 .categoryBody ul {
@@ -37,23 +37,27 @@
 
 .subBody {
     text-align: left;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
 }
 
 .product {
-    font-size: clamp(16px, 1vw, 30px);
+    font-size: clamp(24px, 1.5vw, 68px);
     width: 100%;
     background-color: white;
     margin-left: clamp(5px, 1.5vw, 300px);
     margin-top: 2vh;
     margin-bottom: 2vh;
-    border: solid 3px black;
-    border-radius: 16px;
+    border: solid 3px orange;
     text-align: center;
+    min-height: 50vh;
+    position: relative;
+    background-color: gold;
 }
 
 .product:hover {
     transform: scale(1.05, 1.05);
-    color: blue;
+    color: maroon;
 }
 
 .productImage {
@@ -61,20 +65,33 @@
 }
 
 .productRetailPrice {
-    font-size: clamp(16px, 1vw, 26px);
+    font-size: clamp(30px, 1vw, 60px);
     text-decoration: line-through;
     color: gray;
+    position: absolute;
+    bottom: 0;
+    left: 2vw;
 }
 
 .productWholesalePrice {
-    font-size: clamp(36px, 1vw, 66px);
+    font-size: clamp(30px, 1vw, 60px);
+    color: black;
+    position: absolute;
+    bottom: 0;
+    right: 2vw;
 }
 
 .title {
     background-color: red;
+    border-top: solid 3px orange;
 }
 
 .title text {
     color: white;
     text-shadow: black 2px 2px;
+}
+
+.productTitle {
+    width: 80%;
+    margin: auto;
 }
