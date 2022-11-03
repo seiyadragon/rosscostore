@@ -38,7 +38,7 @@ export function ProductDetails({product}) {
     return (
         <section className={styles.product}>
             <section className={styles.title}>
-                <text><strong>{product.name}</strong></text>
+                <span><strong>{product.name}</strong></span>
             </section>
             <section className={styles.images}>
                 <Image src={`${currentUrl}`} width={1920} height={1080}/>
@@ -47,7 +47,7 @@ export function ProductDetails({product}) {
                         return (
                             <li key={image.id}>
                                 <button 
-                                    style={{'border': currentUrl == image.url ? 'solid 3px red' : 'solid 3px darkgoldenrod'}}
+                                    style={{'border': currentUrl == image.url ? 'solid 3px darkred' : 'solid 3px darkgoldenrod'}}
                                     onClick={() => onButtonClick(image.url)}
                                 >
                                     <Image src={`${image.url}`} width={1920/16} height={1080/16}/>
@@ -59,13 +59,13 @@ export function ProductDetails({product}) {
             </section>
             <section className={styles.productBody}>
                 <strong>
-                    <text>{"Price: $" + product.retailPrice}</text><br />
-                    <text>{"Shipping: $" + "9.99"}</text><br />
-                    <text>{"SKU: " + product.sku}</text><br />
-                    <text>{"Stock: " + product.quantity + " left!"}</text><br />
+                    <span>{"Price: $" + product.retailPrice}</span><br />
+                    <span>{"Shipping: $" + "9.99"}</span><br />
+                    <span>{"SKU: " + product.sku}</span><br />
+                    <span>{"Stock: " + product.quantity + " left!"}</span><br />
                     <br />
                 </strong>
-                <text dangerouslySetInnerHTML={{__html: product.description}}></text>
+                <span dangerouslySetInnerHTML={{__html: product.description}}></span>
             </section>
         </section>
     )

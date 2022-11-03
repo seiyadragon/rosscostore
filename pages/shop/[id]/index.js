@@ -4,6 +4,8 @@ import Link from "next/link";
 import { createClient } from '@supabase/supabase-js'
 import { CategorySelector } from "..";
 import Image from "next/image";
+import { FaShoppingCart } from "react-icons/fa";
+import { global } from "styled-jsx/css";
 
 const supabase = createClient("https://jnbnzuyiuuaocbltwewu.supabase.co", 
 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp" + 
@@ -32,16 +34,21 @@ export async function getServerSideProps(context) {
         const {data: prods, err4} = await supabase.from('Product').select('*').range(productRangeCounter * 1000, ((productRangeCounter + 1) * 1000))
         prods.map((product) => {
             subCategories.map((cat) => {
-                if (product.category == cat.id)
+                if (product.category === cat.id)
                     products.push(product)
             })
         })
+
+        //if (productRangeCounter >= 1)
+        //    shouldLoadMoreProducts = false
 
         if (prods.length < 1000)
             shouldLoadMoreProducts = false
 
         productRangeCounter++
     }
+
+    console.log(products.length)
 
     return {
         props: {
@@ -51,6 +58,16 @@ export async function getServerSideProps(context) {
             products: products
         }
     }
+}
+
+export function AddToCart({product}) {
+    function onClick() {
+        
+    }
+
+    return (
+        <button className={styles.addToCart} onClick={onClick}><FaShoppingCart /></button>
+    )
 }
 
 export function Product({product, mainCategory}) {
@@ -63,21 +80,24 @@ export function Product({product, mainCategory}) {
 
     return (
         typeof product !== 'undefined' && 
-        <Link href={"/shop/" + mainCategory.id + "/" + product.id}>
-            <section className={styles.product}>
-                <section className={styles.productImage}>
-                    <Image src={`${coverImage}`} width={1280} height={720} />
-                </section>
-                <section className={styles.productInfo}>
-                    <section className={styles.productTitle}>
-                        <strong><text>{product.name}</text></strong>
+        <section className={styles.product}>
+            <Link href={"/shop/" + mainCategory.id + "/" + product.id}>
+                <section>
+                    <section className={styles.productImage}>
+                        <Image src={`${coverImage}`} width={1280} height={720} />
                     </section>
-                    <br />
-                    <text className={styles.productRetailPrice}><strong>{" $" + product.retailPrice}</strong></text><br />
-                    <text className={styles.productWholesalePrice}><strong>{" $" + product.wholesalePrice}</strong></text>
+                    <section className={styles.productInfo}>
+                        <section className={styles.productTitle}>
+                            <strong><span>{product.name}</span></strong>
+                        </section>
+                        <br />
+                        <span className={styles.productRetailPrice}><strong>{" $" + product.retailPrice}</strong></span><br />
+                        <span className={styles.productWholesalePrice}><strong>{" $" + product.wholesalePrice}</strong></span>
+                    </section>
                 </section>
-            </section>
-        </Link>
+            </Link>
+            <AddToCart />
+        </section>
     )
 }
 
@@ -92,7 +112,7 @@ export function SubCategory({category, products, mainCategory}) {
         productsCategory.length > 0 &&
         <section className={styles.subCategory}>
             <section className={styles.title}>
-                <text><strong>{category.name + "!"}</strong></text>
+                <span><strong>{category.name + "!"}</strong></span>
             </section>
             <section className={styles.subBody}>
                 <ul>

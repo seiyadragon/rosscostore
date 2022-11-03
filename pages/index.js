@@ -13,9 +13,9 @@ export function Navbar({title}) {
       </Head>
 
       <div className={styles.nav}>
-        <a><Link href='/'><text><FaHome /></text></Link></a>
-        <a><Link href='/shop'><text><FaStore /></text></Link></a>
-        <a><Link href='/contact'><text><FaEnvelope /></text></Link></a>
+        <a><Link href='/'><span><FaHome /></span></Link></a>
+        <a><Link href='/shop'><span><FaStore /></span></Link></a>
+        <a><Link href='/contact'><span><FaEnvelope /></span></Link></a>
       </div>
       <h1 className={styles.title}>{title}</h1>
     </div>
@@ -26,7 +26,7 @@ export function PictureText({text, image}) {
   return (
     <section className={styles.goals}>
         <section><Image src={image} width='1920' height='1080'></Image></section>
-        <text>{text}</text>
+        <span>{text}</span>
     </section>
   )
 }

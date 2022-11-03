@@ -46,7 +46,6 @@
   color: azure;
   font-size: clamp(80px, 10vw, 300px);
   text-shadow: 5px 5px #000000;
-  -webkit-text-stroke: 0.25vw orangered;
 }
 
 .goals {
@@ -63,7 +62,7 @@
   background-size: contain;
 }
 
-.goals text {
+.goals span {
   margin-top: 10vw;
   color: azure;
   font-size: clamp(30px, 5vw, 60px);

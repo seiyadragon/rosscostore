@@ -26,7 +26,7 @@ export function Category({category, backgroundColor, color, link}) {
             <a>
                 <Link href={link}>
                     <section className={styles.category}>
-                        <text>{category.name}</text>
+                        <strong><span>{category.name}</span></strong>
                     </section>
                 </Link>
             </a>
@@ -39,16 +39,16 @@ export function CategorySelector({categories, currentCategory}) {
         <section className={styles.categories}>
             {currentCategory == null &&
                 <section className={styles.noCategory}>
-                    <text>{"There is nothing you won't find at RoßCo!"}</text>
+                    <span>{"There is nothing you won't find at RoßCo!"}</span>
                 </section>
             }
             
             <ul>
                 {categories.map((cat, index) => {
                     if (currentCategory != null && cat.id === currentCategory.id)
-                        return <Category category={cat} backgroundColor="orangered" color="gold" link={"/shop/" + cat.id} key={index}/>
+                        return <Category category={cat} backgroundColor="orangered" color="black" link={"/shop/" + cat.id} key={index}/>
                     else {
-                        return <Category category={cat} backgroundColor="#810020" color="azure" link={"/shop/" + cat.id} key={index}/>
+                        return <Category category={cat} backgroundColor="#810020" color="orangered" link={"/shop/" + cat.id} key={index}/>
                     }
                 })}
             </ul>
@@ -60,9 +60,7 @@ export default function Shop({categories}) {
     return (
         <main className={styles.container}>
             <Navbar title="Shop"/>
-
             <CategorySelector categories={categories} />
-
         </main>
     )
 }

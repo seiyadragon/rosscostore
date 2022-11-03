@@ -26,12 +26,8 @@
     transform: scale(1.05, 1.05);
 }
 
-.category text {
+.category span {
     font-size: clamp(25px, 3vw, 50px);
-}
-
-.category text:hover {
-    color: darkgoldenrod;
 }
 
 .noCategory {
@@ -41,4 +37,8 @@
     text-align: center;
     font-size: clamp(50px, 8vw, 150px);
     text-shadow: 5px 5px #000000;
+}
+
+.noCategory span {
+    color: azure;
 }
