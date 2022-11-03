@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import {FaHome, FaStore, FaEnvelope} from 'react-icons/fa'
 
 export function Navbar({title}) {
   return (
@@ -12,9 +13,9 @@ export function Navbar({title}) {
       </Head>
 
       <div className={styles.nav}>
-        <a><Link href='/'><text>Home</text></Link></a>
-        <a><Link href='/shop'><text>Shop</text></Link></a>
-        <a><Link href='/contact'><text>Contact</text></Link></a>
+        <a><Link href='/'><text><FaHome /></text></Link></a>
+        <a><Link href='/shop'><text><FaStore /></text></Link></a>
+        <a><Link href='/contact'><text><FaEnvelope /></text></Link></a>
       </div>
       <h1 className={styles.title}>{title}</h1>
     </div>

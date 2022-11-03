@@ -13,6 +13,7 @@
 .categoryBody ul {
     list-style: none;
     padding: 0;
+    margin-top: 0;
 }
 
 .subCategory {
@@ -29,7 +30,7 @@
     row-gap: 2vh;
 }
 
-@media all and (max-width: 600px) {
+@media all and (max-width: 1000px) {
     .subCategory ul {
         grid-template-columns: repeat(auto-fit, 45%);
     }
@@ -50,7 +51,7 @@
     margin-bottom: 2vh;
     border: solid 3px orange;
     text-align: center;
-    min-height: 50vh;
+    min-height: clamp(350px, 22vw, 1000px);
     position: relative;
     background-color: gold;
 }
@@ -65,20 +66,20 @@
 }
 
 .productRetailPrice {
-    font-size: clamp(30px, 1vw, 60px);
+    font-size: clamp(20px, 1vw, 60px);
     text-decoration: line-through;
     color: gray;
     position: absolute;
     bottom: 0;
-    left: 2vw;
+    left: clamp(5px, 1vw, 10px);
 }
 
 .productWholesalePrice {
-    font-size: clamp(30px, 1vw, 60px);
+    font-size: clamp(20px, 1vw, 60px);
     color: black;
     position: absolute;
     bottom: 0;
-    right: 2vw;
+    right: clamp(5px, 1vw, 10px);;
 }
 
 .title {
