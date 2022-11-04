@@ -27,7 +27,7 @@
 }
 
 .category span {
-    font-size: clamp(25px, 3vw, 50px);
+    font-size: clamp(26px, 3vw, 45px);
 }
 
 .noCategory {

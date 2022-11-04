@@ -4,10 +4,15 @@
 }
 
 .categoryBody {
-    background-color: darkgoldenrod;
     margin-top: 1.7vh;
     width: 70vw;
-    border: solid 3px orangered;
+    border: solid 6px orangered;
+    background-size: contain;
+}
+
+.categoryBodyWrapper {
+    background-color: rgb(0, 0, 0, 0.75);
+    backdrop-filter: blur(20px);
 }
 
 .categoryBody ul {
@@ -17,7 +22,6 @@
 }
 
 .subCategory {
-    font-size: clamp(24px, 2vw, 36px);
     text-align: center;
     width: 100%;
     margin: auto;
@@ -30,12 +34,6 @@
     row-gap: 2vh;
 }
 
-@media all and (max-width: 1000px) {
-    .subCategory ul {
-        grid-template-columns: repeat(auto-fit, 45%);
-    }
-}
-
 .subBody {
     text-align: left;
     padding-top: 3vh;
@@ -43,74 +41,70 @@
 }
 
 .product {
-    font-size: clamp(20px, 1.5vw, 60px);
+    font-size: clamp(14px, 1.25vw, 32px);
     width: 100%;
-    background-color: white;
     margin-left: clamp(5px, 1.5vw, 300px);
-    margin-top: 2vh;
-    margin-bottom: 2vh;
     border: solid 3px orange;
-    text-align: center;
-    min-height: clamp(350px, 22vw, 1000px);
     position: relative;
-    background-color: gold;
+    background-size: cover;
+    height: clamp(200px, 25vh, 250px);
 }
 
 .product:hover {
     transform: scale(1.05, 1.05);
-    color: maroon;
-}
-
-.productImage {
-    padding: 1vw;
-}
-
-.productRetailPrice {
-    font-size: clamp(20px, 1vw, 60px);
-    text-decoration: line-through;
-    color: gray;
-    position: absolute;
-    bottom: 4.5vh;
-    left: clamp(5px, 1vw, 10px);
 }
 
 .productWholesalePrice {
-    font-size: clamp(20px, 1vw, 60px);
-    color: black;
-    position: absolute;
-    bottom: 4.5vh;
-    right: clamp(5px, 1vw, 10px);;
+    color: azure;
 }
 
 .title {
-    background-color: red;
-    border-top: solid 3px orange;
-}
-
-.title span {
     color: white;
     text-shadow: black 2px 2px;
+    font-size: clamp(40px, 3vw, 60px);
 }
 
 .productTitle {
-    width: 80%;
-    margin: auto;
-    color: orangered;
-    -webkit-text-stroke: darkgoldenrod 1px;
+    width: 100%;
+    color: azure;
+    background-color: rgb(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    position: absolute;
+    top: 0vh;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.productTitle:hover {
+    backdrop-filter: none;
 }
 
 .addToCart {
-    width: 100%;
     border: none;
-    background-color: orange;
-    position: absolute;
-    bottom: 0;
-    left: 0;
     font-size: clamp(24px, 1.5vw, 68px);
-    padding-top: 9px;
-    color: red;
+    color: white;
+    position: absolute;
+    bottom: 0vh;
+    left: 0.5vw;
 }
 
 .addToCart:hover {
-    color: darkgoldenrod;
+    color: orangered;
+    transform: scale(1.25, 1.25);
+}
+
+.productImage {
+    padding: 0;
+    margin: 0;
+}
+
+@media all and (max-width: 1000px) {
+    .subCategory ul {
+        grid-template-columns: repeat(auto-fit, 45%);
+    }
+
+    .product {
+        height: clamp(100px, 15vh, 150px);
+    }
 }

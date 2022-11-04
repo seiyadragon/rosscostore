@@ -39,9 +39,6 @@ export async function getServerSideProps(context) {
             })
         })
 
-        //if (productRangeCounter >= 1)
-        //    shouldLoadMoreProducts = false
-
         if (prods.length < 1000)
             shouldLoadMoreProducts = false
 
@@ -66,7 +63,7 @@ export function AddToCart({product}) {
     }
 
     return (
-        <button className={styles.addToCart} onClick={onClick}><FaShoppingCart /></button>
+        <a className={styles.addToCart} onClick={onClick}><FaShoppingCart /></a>
     )
 }
 
@@ -78,22 +75,19 @@ export function Product({product, mainCategory}) {
                 coverImage = image.url
         })
 
+    let name = product.name
+    if (name.length >= 17) {
+        name = name.slice(0, 17)
+        name = name.concat("...")
+    }
+
     return (
         typeof product !== 'undefined' && 
-        <section className={styles.product}>
+        <section className={styles.product} style={{"backgroundImage": `url(${coverImage})`}}>
             <Link href={"/shop/" + mainCategory.id + "/" + product.id}>
-                <section>
-                    <section className={styles.productImage}>
-                        <Image src={`${coverImage}`} width={1280} height={720} />
-                    </section>
-                    <section className={styles.productInfo}>
-                        <section className={styles.productTitle}>
-                            <strong><span>{product.name}</span></strong>
-                        </section>
-                        <br />
-                        <span className={styles.productRetailPrice}><strong>{" $" + product.retailPrice}</strong></span><br />
-                        <span className={styles.productWholesalePrice}><strong>{" $" + product.wholesalePrice}</strong></span>
-                    </section>
+                <section className={styles.productTitle}>
+                    <strong><span>{name}</span></strong>
+                    <span className={styles.productWholesalePrice}><strong>{" $" + product.wholesalePrice}</strong></span><br />
                 </section>
             </Link>
             <AddToCart />
@@ -131,16 +125,18 @@ export default function CategoryPage({categories, currentCategory, subCategories
             <Navbar title={`${currentCategory.name}`}/>
             <section className={styles.category}>
                 <CategorySelector categories={categories} currentCategory={currentCategory}/>
-                <section className={styles.categoryBody}>
-                    <ul>
-                        {subCategories.map((category) => {
-                            return (
-                                <li key={category.id}>
-                                    <SubCategory category={category} products={products} mainCategory={currentCategory}/>
-                                </li>
-                            )
-                        })}
-                    </ul>
+                <section className={styles.categoryBody} style={{"backgroundImage": `url(${currentCategory.imageUrl})`}}>
+                    <section className={styles.categoryBodyWrapper}>
+                        <ul>
+                            {subCategories.map((category) => {
+                                return (
+                                    <li key={category.id}>
+                                        <SubCategory category={category} products={products} mainCategory={currentCategory}/>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </section>
                 </section>
             </section>
         </main>
