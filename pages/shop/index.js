@@ -7,7 +7,7 @@ const supabase = createClient("https://jnbnzuyiuuaocbltwewu.supabase.co",
 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp" + 
 "uYm56dXlpdXVhb2NibHR3ZXd1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjY3MjExMjEsImV4cCI6MTk4MjI5NzEyMX0.vnmH8LhJevM1ju-l9d0MnRXL6BmGNjOTw5XS0vO6NHY")
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
     const {data: cats, error} = await supabase.from('Category').select('*').eq('parentCategory', 2) 
 
     if (error != null)
