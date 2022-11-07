@@ -5,6 +5,7 @@ import { createClient } from '@supabase/supabase-js'
 import { CategorySelector } from "..";
 import Image from "next/image";
 import { useState } from "react";
+import { AddToCart } from ".";
 
 const supabase = createClient("https://jnbnzuyiuuaocbltwewu.supabase.co", 
 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp" + 
@@ -47,7 +48,7 @@ export function ProductDetails({product}) {
                         return (
                             <li key={image.id}>
                                 <button 
-                                    style={{'border': currentUrl == image.url ? 'solid 3px darkred' : 'solid 3px darkgoldenrod'}}
+                                    style={{'border': currentUrl == image.url ? 'solid 3px red' : 'solid 3px azure'}}
                                     onClick={() => onButtonClick(image.url)}
                                 >
                                     <Image src={`${image.url}`} width={1920/16} height={1080/16}/>
@@ -60,7 +61,7 @@ export function ProductDetails({product}) {
             <section className={styles.productBody}>
                 <strong>
                     <span>{"Price: $" + product.retailPrice}</span><br />
-                    <span>{"Shipping: $" + "9.99"}</span><br />
+                    <span>{"Shipping: $" + "8.99"}</span><br />
                     <span>{"SKU: " + product.sku}</span><br />
                     <span>{"Stock: " + product.quantity + " left!"}</span><br />
                     <br />
@@ -77,8 +78,13 @@ export default function ProductPage({product, categories, currentCategory}) {
             <Navbar title={currentCategory.name}/>
             <section className={styles.category}>
                 <CategorySelector categories={categories} currentCategory={currentCategory}/>
-                <section className={styles.categoryBody}>
-                    <ProductDetails product={product} />
+                <section className={styles.categoryBody} style={{"backgroundImage": `url(${product.images[0].url})`}}>
+                    <section className={styles.productWrapper}>
+                        <ProductDetails product={product} />
+                    </section>
+                        <section className={styles.addToCartWrapper}>
+                            <AddToCart />
+                        </section>
                 </section>
             </section>
         </main>

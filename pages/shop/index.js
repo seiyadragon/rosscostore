@@ -21,12 +21,14 @@ export async function getServerSideProps() {
 }
 
 export function Category({category, backgroundColor, color, link}) {
+    let name = category.name.split(" | ")
+
     return (
         <li style={{"backgroundColor": backgroundColor, "color": color}}>
             <a>
                 <Link href={link}>
                     <section className={styles.category}>
-                        <strong><span>{category.name}</span></strong>
+                        <strong><span>{name[0]}</span></strong>
                     </section>
                 </Link>
             </a>

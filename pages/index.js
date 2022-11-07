@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import {FaHome, FaStore, FaEnvelope} from 'react-icons/fa'
+import {FaHome, FaStore, FaEnvelope, FaUser} from 'react-icons/fa'
 
 export function Navbar({title}) {
   return (
@@ -16,6 +16,7 @@ export function Navbar({title}) {
         <a><Link href='/'><span><FaHome /></span></Link></a>
         <a><Link href='/shop'><span><FaStore /></span></Link></a>
         <a><Link href='/contact'><span><FaEnvelope /></span></Link></a>
+        <a><Link href='/account'><span><FaUser /></span></Link></a>
       </div>
       <h1 className={styles.title}>{title}</h1>
     </div>
@@ -24,8 +25,7 @@ export function Navbar({title}) {
 
 export function PictureText({text, image}) {
   return (
-    <section className={styles.goals}>
-        <section><Image src={image} width='1920' height='1080'></Image></section>
+    <section className={styles.goals} style={{"backgroundImage": `url(${image})`}}>
         <span>{text}</span>
     </section>
   )

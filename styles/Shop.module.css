@@ -35,7 +35,7 @@
     width: 30vw;
     margin-left: 35vw;
     text-align: center;
-    font-size: clamp(50px, 8vw, 150px);
+    font-size: clamp(40px, 8vw, 140px);
     text-shadow: 5px 5px #000000;
 }
 

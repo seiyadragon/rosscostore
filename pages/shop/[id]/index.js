@@ -11,11 +11,25 @@ const supabase = createClient("https://jnbnzuyiuuaocbltwewu.supabase.co",
 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp" + 
 "uYm56dXlpdXVhb2NibHR3ZXd1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjY3MjExMjEsImV4cCI6MTk4MjI5NzEyMX0.vnmH8LhJevM1ju-l9d0MnRXL6BmGNjOTw5XS0vO6NHY")
 
+export async function getStaticPaths() {
+    const {data: categories, err2} = await supabase.from('Category').select('*').eq('parentCategory', 2)
+    
+    let paths = []
+    categories.map((category) => {
+        paths.push("/shop/" + category.id)
+    })
+
+    return {
+        paths: paths,
+        fallback: false,
+    }
+}
+
 //Load data from server
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
     const {data: allCategories, err} = await supabase.from('Category').select('*')
     const {data: categories, err2} = await supabase.from('Category').select('*').eq('parentCategory', 2)
-    const {data: currentCategory, err3} = await supabase.from('Category').select('*').eq('id', context.query.id)
+    const {data: currentCategory, err3} = await supabase.from('Category').select('*').eq('id', context.params.id)
 
     let subCategories = []
     for (let i = 0; i < allCategories.length; i++) 
@@ -44,8 +58,6 @@ export async function getServerSideProps(context) {
 
         productRangeCounter++
     }
-
-    console.log(products.length)
 
     return {
         props: {
