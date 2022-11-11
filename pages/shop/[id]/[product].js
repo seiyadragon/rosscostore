@@ -40,16 +40,16 @@ export function ProductDetails({product}) {
                 <span><strong>{product.name}</strong></span>
             </section>
             <section className={styles.images}>
-                <Image src={`${currentUrl}`} width={1920} height={1080}/>
+                <section className={styles.images_main} style={{"backgroundImage": `url(${currentUrl})`}} />
                 <ul>
                     {product.images.map((image) => {
                         return (
                             <li key={image.id}>
                                 <button 
-                                    style={{'border': currentUrl == image.url ? 'solid 3px red' : 'solid 3px azure'}}
+                                    style={{'border': currentUrl == image.url ? 'solid 6px red' : 'solid 6px azure'}}
                                     onClick={() => onButtonClick(image.url)}
                                 >
-                                    <Image src={`${image.url}`} width={1920/16} height={1080/16}/>
+                                    <section className={styles.images_button} style={{"backgroundImage": `url(${image.url})`}}/>
                                 </button>
                             </li>
                         )
@@ -80,9 +80,9 @@ export default function ProductPage({product, categories, currentCategory}) {
                     <section className={styles.productWrapper}>
                         <ProductDetails product={product} />
                     </section>
-                        <section className={styles.addToCartWrapper}>
-                            <AddToCart />
-                        </section>
+                    <section className={styles.addToCartWrapper}>
+                        <AddToCart />
+                    </section>
                 </section>
             </section>
         </main>

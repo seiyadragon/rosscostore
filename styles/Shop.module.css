@@ -9,17 +9,17 @@
     top: 0;
 }
 
-.categories a {
-    text-decoration: none;
-}
-
 .category {
     margin: 0.5vw;
     background-size: cover;
     background-repeat: no-repeat;
     border-radius: 25px;
-    text-align: right;
+    text-align: center;
     margin-right: 1.5vw;
+}
+
+.category:link, .category:visited, .category:hover, .category:active {
+    text-decoration: none;
 }
 
 .category:hover {

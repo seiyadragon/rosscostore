@@ -5,19 +5,21 @@
   width: 80vw;
 }
 
-.logo {
-  margin-left: auto;
-  margin-right: auto;
-  width: clamp(100px, 50vw, 800px);
+.nav_backdrop {
+  background-image: url("/rossco_logo.png");
+  background-size: contain;
 }
 
 .nav {
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
   text-align: center;
-  margin-top: 3vh;
+  margin-top: 1vh;
   border-bottom: solid orange;
   border-radius: 15px;
+  background-color: rgb(33, 33, 33, 0.5);
+  backdrop-filter: blur(5px);
+  padding-top: clamp(20px, 3vh, 50px);
 }
 
 .nav a {

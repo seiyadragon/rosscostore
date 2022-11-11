@@ -22,14 +22,12 @@ export function Category({category, backgroundColor, color, link}) {
     let name = category.name.split(" | ")
 
     return (
-        <li style={{"backgroundColor": backgroundColor, "color": color}}>
-            <a>
-                <Link href={link}>
-                    <section className={styles.category}>
-                        <strong><span>{name[0]}</span></strong>
-                    </section>
-                </Link>
-            </a>
+        <li>
+            <Link href={link} style={{"textDecoration": "none"}}>
+                <section className={styles.category} style={{"backgroundColor": backgroundColor, "color": color}}>
+                    <strong><span>{name[0]}</span></strong>
+                </section>
+            </Link>
         </li>
     )
 }
