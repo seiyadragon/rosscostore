@@ -6,6 +6,7 @@ import { CategorySelector } from "..";
 import Image from "next/image";
 import { FaShoppingCart } from "react-icons/fa";
 import { global } from "styled-jsx/css";
+import { SearchBar } from "..";
 
 const supabase = createClient("https://jnbnzuyiuuaocbltwewu.supabase.co", process.env.SUPABASE_AUTH)
 
@@ -62,7 +63,7 @@ export async function getStaticProps(context) {
             categories: categories,
             currentCategory: currentCategory[0],
             subCategories: subCategories,
-            products: products
+            products: products,
         }
     }
 }
@@ -129,24 +130,31 @@ export function SubCategory({category, products, mainCategory}) {
     )
 }
 
+export function CategoryBody({subCategories, products, currentCategory}) {
+    return (
+        <section className={styles.categoryBodyWrapper}>
+            <ul>
+                {subCategories.map((category) => {
+                    return (
+                        <li key={category.id}>
+                            <SubCategory category={category} products={products} mainCategory={currentCategory}/>
+                        </li>
+                    )
+                })}
+            </ul>
+        </section>
+    )
+}
+
 export default function CategoryPage({categories, currentCategory, subCategories, products}) {
     return (
         <main className={styles.container}>
             <Navbar title={`${currentCategory.name}`}/>
+            <SearchBar />
             <section className={styles.category}>
                 <CategorySelector categories={categories} currentCategory={currentCategory}/>
                 <section className={styles.categoryBody} style={{"backgroundImage": `url(${currentCategory.imageUrl})`}}>
-                    <section className={styles.categoryBodyWrapper}>
-                        <ul>
-                            {subCategories.map((category) => {
-                                return (
-                                    <li key={category.id}>
-                                        <SubCategory category={category} products={products} mainCategory={currentCategory}/>
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                    </section>
+                    <CategoryBody subCategories={subCategories} products={products} currentCategory={currentCategory}/>
                 </section>
             </section>
         </main>

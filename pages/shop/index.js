@@ -2,6 +2,9 @@ import { Navbar } from "..";
 import styles from '../../styles/Shop.module.css'
 import Link from "next/link";
 import { createClient } from '@supabase/supabase-js'
+import { FaSearch } from "react-icons/fa";
+import { useState } from "react"
+import { CategoryBody } from "./[id]";
 
 const supabase = createClient("https://jnbnzuyiuuaocbltwewu.supabase.co", process.env.SUPABASE_AUTH)
 
@@ -32,15 +35,9 @@ export function Category({category, backgroundColor, color, link}) {
     )
 }
 
-export function CategorySelector({categories, currentCategory}) {
+export function CategorySelector({categories, currentCategory, noCategory}) {
     return (
         <section className={styles.categories}>
-            {currentCategory == null &&
-                <section className={styles.noCategory}>
-                    <span>{"There is nothing you won't find at RoßCo!"}</span>
-                </section>
-            }
-            
             <ul>
                 {categories.map((cat, index) => {
                     if (currentCategory != null && cat.id === currentCategory.id)
@@ -54,11 +51,31 @@ export function CategorySelector({categories, currentCategory}) {
     )
 }
 
+export function SearchBar() {
+    let [text, setText] = useState()
+
+    function onChange(event) {
+        setText(event.target.value)
+    }
+
+    return (
+        <section className={styles.search}>
+            <input value={text} placeholder="🔍" onChange={onChange}/>
+        </section>
+    )
+}
+
 export default function Shop({categories}) {
     return (
         <main className={styles.container}>
             <Navbar title="Shop"/>
-            <CategorySelector categories={categories} />
+            <SearchBar />
+            <section className={styles.categoriesWrapper} >
+                <CategorySelector categories={categories} currentCategory={null}/>
+                <section className={styles.categoryBody}>
+                    
+                </section>
+            </section>
         </main>
     )
 }

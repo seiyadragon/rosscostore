@@ -1,0 +1,12 @@
+.category {
+    display: grid;
+    grid-template-columns: 25vw 50vw;
+}
+
+.categoryBody {
+    margin-top: 1.7vh;
+    width: 70vw;
+    border: solid 6px orangered;
+    background-size: contain;
+    border-radius: 32px;
+}

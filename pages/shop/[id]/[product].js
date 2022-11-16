@@ -34,6 +34,8 @@ export function ProductDetails({product}) {
         setCurrentUrl(url)
     }
 
+    let shippingCost = "9.99"
+
     return (
         <section className={styles.product}>
             <section className={styles.title}>
@@ -59,7 +61,7 @@ export function ProductDetails({product}) {
             <section className={styles.productBody}>
                 <strong>
                     <span>{"Price: $" + product.retailPrice}</span><br />
-                    <span>{"Shipping: $" + "8.99"}</span><br />
+                    <span>{"Shipping: $" + shippingCost}</span><br />
                     <span>{"SKU: " + product.sku}</span><br />
                     <span>{"Stock: " + product.quantity + " left!"}</span><br />
                     <br />
